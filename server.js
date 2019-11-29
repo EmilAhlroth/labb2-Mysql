@@ -8,16 +8,24 @@ const db = mysql.createConnection ({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'socka'
+    database: 'labb2'
 });
 
+
 // connect to database
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Connected to database');
+db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected")
+    var sql = "INSERT INTO text (title, text, author, comment) VALUES ('TITEL', 'TEXT', 'AUTHOR', 'COMMENT')";
+    db.query(sql, function (err, result){
+      if(err) throw err;
+    });
 });
+
+db.query("SELECT * FROM text", function (err, result, fields) {
+  if(err) throw err;
+  console.log(result);
+  });
 
 var store = {
   posts: [
